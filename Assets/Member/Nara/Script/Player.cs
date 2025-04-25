@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,10 +19,10 @@ public class Player : MonoBehaviour
     {
         if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            // ç∂ÅAâE
+            // Â∑¶„ÄÅÂè≥
             direction.x = Input.GetAxisRaw("Horizontal");
 
-            // è„ÅAâ∫
+            // ‰∏ä„ÄÅ‰∏ã
             direction.y = Input.GetAxisRaw("Vertical");
         }
     }
