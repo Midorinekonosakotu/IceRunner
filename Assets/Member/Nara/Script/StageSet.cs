@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageSet : MonoBehaviour
 {
-    const int StageTipSize = 20;    // 自動生成するステージオブジェクトの端から端までの大きさ
+    const int StageTipSize = 10;    // 自動生成するステージオブジェクトの端から端までの大きさ
     int currentTipIndex;
     public Transform character;     // ターゲットするキャラクターの指定
     public GameObject[] stageTips;  // ステージチップの配列
@@ -54,7 +54,7 @@ public class StageSet : MonoBehaviour
 
         GameObject stageObject = (GameObject)Instantiate(
             stageTips[nextStageTip],
-            new Vector3(0, tipIndex * StageTipSize, 0),
+            new Vector3(3, tipIndex * StageTipSize, 0),
             Quaternion.identity) as GameObject;
         return stageObject;
     }
