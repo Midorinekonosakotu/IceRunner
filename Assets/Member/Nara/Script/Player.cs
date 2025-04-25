@@ -19,7 +19,10 @@ public class Player : MonoBehaviour
     {
         if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
+            // ç∂ÅAâE
             direction.x = Input.GetAxisRaw("Horizontal");
+
+            // è„ÅAâ∫
             direction.y = Input.GetAxisRaw("Vertical");
         }
     }
