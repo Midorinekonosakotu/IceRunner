@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float speed = 1.0f;
+    private float speed = 10.0f;
     private Vector2 direction;
     CircleCollider2D circleCol;
     void Start()
@@ -15,6 +15,9 @@ public class PlayerMover : MonoBehaviour
     }
     void Update()
     {
+        //â¡ë¨óp
+        float xSpeed = 0.0f;
+        float ySpeed = 0.0f;
         if(Input.GetAxisRaw("Horizontal") !=0 || Input.GetAxisRaw("Vertical") != 0)
         {
             //ç∂ÅAâE
@@ -38,6 +41,7 @@ public class PlayerMover : MonoBehaviour
             circleCol.enabled = true;
             Debug.Log("Atack!");
             StartCoroutine("WaitTime");
+            speed = 1.0f;
 
         }
         else
@@ -49,8 +53,10 @@ public class PlayerMover : MonoBehaviour
     }
     IEnumerator WaitTime()
     {
+        //è’åÇîgéùë±
         yield return new WaitForSeconds(1);
         circleCol.enabled = false;
+
         Debug.Log("End");
     }
 }
