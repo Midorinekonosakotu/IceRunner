@@ -32,4 +32,14 @@ public class Player : MonoBehaviour
         Vector2 dist = direction * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + dist);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Map")
+        {
+            Debug.Log("Map Hit");
+            StartCoroutine("WaitTime");
+
+        }
+    }
 }
