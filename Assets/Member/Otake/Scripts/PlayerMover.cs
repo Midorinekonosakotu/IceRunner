@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
@@ -17,6 +19,9 @@ public class PlayerMover : MonoBehaviour
     private int counter = 0;
     //ã»Ç™ÇÈèàóùÇ…é∏îsÇµÇΩéû
     private bool isHitWall = false;
+
+    private bool hori = false;
+    private bool vart = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,17 +29,18 @@ public class PlayerMover : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetAxisRaw("Horizontal") !=0 || Input.GetAxisRaw("Vertical") != 0)
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             //ç∂ÅAâE
             _directionReserve.x = Input.GetAxisRaw("Horizontal");
             //è„ÅAâ∫
             _directionReserve.y = Input.GetAxisRaw("Vertical");
         }
-        if(_directionReserve != Vector2.zero)
+        if (_directionReserve != Vector2.zero)
         {
             CheckDirection(_directionReserve);
         }
+
     }
     private void FixedUpdate()
     {
@@ -71,24 +77,38 @@ public class PlayerMover : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.BoxCast
             (transform.position, Vector2.one * 0.5f, 0.0f, direction, 1.0f, stageLayer);
-        if(hit.collider == null)
+        if (hit.collider == null)
         {
             _direction = direction;
             _directionReserve = Vector2.zero;
+            if(_direction.x == 1|| _direction.y == -1)
+            {
+                if (_direction.y == 1 || _direction.y == -1)
+                {
+                    speed += 0.01f;
+                    //â¡ë¨
+                    Debug.Log("kasoku");
+                }
+            }
+            if(_direction.y == 1 || _direction.y == -1)
+            {
+
+            }
         }
     }
     private void CountTime()
     {
         float _time = Time.time;
-        if(_time <= 1)
+        if (_time <= 1)
         {
             isHitWall = true;
         }
-        if(isHitWall == true)
+        if (isHitWall == true)
         {
             speed = 1.0f;
             Debug.Log("SpeedReset");
         }
         _time = 0;
     }
+
 }
