@@ -10,7 +10,6 @@ public class PlayerMover : MonoBehaviour
     private float speed = 7.0f;
     private Vector2 _direction;
     private Vector2 _directionReserve;
-    CircleCollider2D circleCol;
     //â¡ë¨óp
     private float xSpeed = 1.0f;
     private float ySpeed = 1.0f;
@@ -24,7 +23,6 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        circleCol = GetComponent<CircleCollider2D>();
     }
     private void Update()
     {
@@ -55,7 +53,6 @@ public class PlayerMover : MonoBehaviour
             Debug.Log("Map Hit");
             if(speed >= 12.0f)
             {
-                circleCol.enabled = true;
                 shockWave.SetActive(true);
                 Debug.Log("Atack!");
             }
@@ -66,7 +63,6 @@ public class PlayerMover : MonoBehaviour
         {
             //ìGîÌíeéû
             Debug.Log("Enemy Hit");
-            circleCol.enabled = false;
             Debug.Log("End2");
         }
     }
@@ -75,7 +71,6 @@ public class PlayerMover : MonoBehaviour
         //è’åÇîgéùë±
         yield return new WaitForSeconds(1);
         shockWave.SetActive(false);
-        circleCol.enabled = false;
         Debug.Log("End");
     }
     private void CheckDirection(Vector2 direction)
