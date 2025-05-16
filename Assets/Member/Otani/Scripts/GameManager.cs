@@ -32,11 +32,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /* “G‚Æ“–‚½‚Á‚½‚Ìˆ—
-        if(player.isHit == true)
-        {
-            GameOver();
-        }*/
+        //“G‚Æ“–‚½‚Á‚½‚Ìˆ—
+        //if (player.isHit == true)
+        //{
+        //    GameOver();
+        //}
     }
 
     void GameOver()
