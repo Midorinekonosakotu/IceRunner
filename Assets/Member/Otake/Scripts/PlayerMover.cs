@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private LayerMask stageLayer;
+    [SerializeField] private GameObject shockWave;
+    [SerializeField] private Transform attackCircle;
     private Rigidbody2D rb;
-    private float speed = 10.0f;
+    private float speed = 7.0f;
     private Vector2 _direction;
     private Vector2 _directionReserve;
     CircleCollider2D circleCol;
@@ -40,7 +39,8 @@ public class PlayerMover : MonoBehaviour
         {
             CheckDirection(_directionReserve);
         }
-
+        //è’åÇîgÇÃîÕàÕÇë¨ìxÇ…âûÇ∂ÇƒägëÂ
+        attackCircle.localScale = Vector3.one * (1.0f + speed / 3.0f);
     }
     private void FixedUpdate()
     {
@@ -53,9 +53,13 @@ public class PlayerMover : MonoBehaviour
         {
             //ï«ê⁄êGéû
             Debug.Log("Map Hit");
-            circleCol.enabled = true;
+            if(speed >= 12.0f)
+            {
+                circleCol.enabled = true;
+                shockWave.SetActive(true);
+                Debug.Log("Atack!");
+            }
             CountTime();
-            Debug.Log("Atack!");
             StartCoroutine("WaitTime");
         }
         else
@@ -70,6 +74,7 @@ public class PlayerMover : MonoBehaviour
     {
         //è’åÇîgéùë±
         yield return new WaitForSeconds(1);
+        shockWave.SetActive(false);
         circleCol.enabled = false;
         Debug.Log("End");
     }
@@ -79,21 +84,17 @@ public class PlayerMover : MonoBehaviour
             (transform.position, Vector2.one * 0.5f, 0.0f, direction, 1.0f, stageLayer);
         if (hit.collider == null)
         {
-            _direction = direction;
             _directionReserve = Vector2.zero;
-            if(_direction.x == 1|| _direction.y == -1)
+            if ((direction.x == 0 && direction.y == 0) == false)
             {
-                if (_direction.y == 1 || _direction.y == -1)
+                if(_direction != direction)
                 {
-                    speed += 0.01f;
+                    speed += 0.2f;
                     //â¡ë¨
                     Debug.Log("kasoku");
                 }
             }
-            if(_direction.y == 1 || _direction.y == -1)
-            {
-
-            }
+            _direction = direction;
         }
     }
     private void CountTime()
@@ -105,7 +106,7 @@ public class PlayerMover : MonoBehaviour
         }
         if (isHitWall == true)
         {
-            speed = 1.0f;
+            //speed = 1.0f;
             Debug.Log("SpeedReset");
         }
         _time = 0;
