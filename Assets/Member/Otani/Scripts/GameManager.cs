@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     //[SerializeField] Player player; ƒvƒŒƒCƒ„[‚ªŠ®¬‚µ‚½‚ç’Ç‰Á
+    [SerializeField] private TextMeshProUGUI _scoreText;
     public static GameManager instance = null;
-    public int Score = 0;
+    private int _score = 0;
 
     private void Awake()
     {
@@ -49,6 +51,12 @@ public class GameManager : MonoBehaviour
     public void OpenSetting()
     {
 
+    }
+
+    public void AddScore(int _scoreAmount)
+    {
+        _score += _scoreAmount;
+        _scoreText.text = $"Score : {_score}";
     }
 
 }

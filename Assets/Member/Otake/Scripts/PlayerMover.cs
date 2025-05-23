@@ -23,6 +23,7 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        shockWave.SetActive(false);
     }
     private void Update()
     {

@@ -21,9 +21,11 @@ public class Bait : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // プレイヤーに当たった時の処理
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            GameManager.instance.Score++;
+            // スコアを加算する
+            GameManager.instance.AddScore(10);
+            // 自身を消す
             Destroy(this.gameObject);
         }
     }
