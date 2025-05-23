@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _pauseButton;
     [SerializeField] private GameObject _playBackButton;
     public static GameManager instance = null;
-    private static int _score = 0;
+    public static int _score = 0;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _score = 0;
+        SetObject();
         _pauseButton.SetActive(true);
         _playBackButton.SetActive(false);
     }
@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
     public void OpenSetting()
     {
 
+    }
+
+    public void SetObject()
+    {
+        _score = 0;
     }
 
     public void AddScore(int _scoreAmount)

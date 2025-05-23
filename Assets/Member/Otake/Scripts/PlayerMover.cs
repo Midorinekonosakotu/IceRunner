@@ -48,13 +48,14 @@ public class PlayerMover : MonoBehaviour
         Vector2 dist = _direction * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + dist);
     }
-    private void OnTriggerEnter2D(Collider2D collider)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collider.gameObject.tag == "Map")
+        if (collision.gameObject.tag == "Map")
         {
             //•ÇÚG
             Debug.Log("Map Hit");
-            if(speed >= 12.0f)
+            if (speed >= 12.0f)
             {
                 shockWave.SetActive(true);
                 Debug.Log("Atack!");
@@ -62,14 +63,15 @@ public class PlayerMover : MonoBehaviour
             CountTime();
             StartCoroutine("WaitTime");
         }
-        if (collider.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             //“G”í’e
             Debug.Log("Enemy Hit");
-            _sceneLoder.LoadResultScene();
             Debug.Log("End2");
         }
+
     }
+
     IEnumerator WaitTime()
     {
         //ÕŒ‚”g‘±

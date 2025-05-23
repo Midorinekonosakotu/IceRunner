@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadGameScene()
     {
+        GameManager.instance.SetObject();
         SceneManager.LoadScene("PlayerTest");
     }
 

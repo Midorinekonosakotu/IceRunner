@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private SceneLoader _sceneLoader;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,14 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("Shockwave"))
+        if (collider.gameObject.CompareTag("Shockwave"))
         {
             Destroy(this.gameObject);
         }
+        if (collider.CompareTag("Player"))
+        {
+            _sceneLoader.LoadResultScene();
+        }
     }
+
 }
