@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Shockwave"))
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
