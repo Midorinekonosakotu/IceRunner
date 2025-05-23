@@ -6,6 +6,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private LayerMask stageLayer;
     [SerializeField] private GameObject shockWave;
     [SerializeField] private Transform attackCircle;
+    public SceneLoader _sceneLoder;
     private Rigidbody2D rb;
     private float speed = 7.0f;
     private Vector2 _direction;
@@ -27,6 +28,10 @@ public class PlayerMover : MonoBehaviour
     }
     private void Update()
     {
+        
+    }
+    private void FixedUpdate()
+    {
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             //¶A‰E
@@ -40,15 +45,12 @@ public class PlayerMover : MonoBehaviour
         }
         //ÕŒ‚”g‚Ì”ÍˆÍ‚ğ‘¬“x‚É‰‚¶‚ÄŠg‘å
         attackCircle.localScale = Vector3.one * (1.0f + speed / 3.0f);
-    }
-    private void FixedUpdate()
-    {
         Vector2 dist = _direction * speed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + dist);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.tag == "Map")
+        if (collider.gameObject.tag == "Map")
         {
             //•ÇÚG
             Debug.Log("Map Hit");
@@ -60,10 +62,11 @@ public class PlayerMover : MonoBehaviour
             CountTime();
             StartCoroutine("WaitTime");
         }
-        else
+        if (collider.gameObject.tag == "Enemy")
         {
             //“G”í’e
             Debug.Log("Enemy Hit");
+            _sceneLoder.LoadResultScene();
             Debug.Log("End2");
         }
     }

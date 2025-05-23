@@ -7,12 +7,22 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("PlayerTest");
     }
 
     public void LoadRankingScene()
     {
         SceneManager.LoadScene("");
+    }
+
+    public void LoadResultScene()
+    {
+        SceneManager.LoadScene("ResultScene");
+    }
+
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 
 }

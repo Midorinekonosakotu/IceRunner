@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 {
     //[SerializeField] Player player; プレイヤーが完成したら追加
     [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private GameObject _pauseButton;
+    [SerializeField] private GameObject _playBackButton;
     public static GameManager instance = null;
-    private int _score = 0;
+    private static int _score = 0;
 
     private void Awake()
     {
@@ -28,7 +30,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _score = 0;
+        _pauseButton.SetActive(true);
+        _playBackButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,8 +59,28 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int _scoreAmount)
     {
+        // 加算するスコアを取得して加算
         _score += _scoreAmount;
+        if(_scoreText == null)
+        {
+            _scoreText = GameObject.Find("Canvas/ScoreText").GetComponent<TextMeshProUGUI>();
+        }
+        // スコアテキストを更新
         _scoreText.text = $"Score : {_score}";
+    }
+
+    public void Pause()
+    {
+        //_playBackButton.SetActive(true);
+        //_pauseButton.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void PlayBack()
+    {
+        //_pauseButton.SetActive(true);
+        //_playBackButton.SetActive(false);
+        Time.timeScale = 1;
     }
 
 }
